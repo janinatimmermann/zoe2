@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Zoe-Demo: Beschleunigungsinterface (Daten)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        button {
+            border:1px solid black;
+        }
+
+        #data {
+            font-family:monospace;
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="./">Zurück</a>
+
+    <button id="download">Save Data</button>
+    <button id="delete">Delete Data</button>
+    <button id="dump">Dump Data</button>
+
+    <div id="data"></div>
+
+    <script>
+        let db;
+
+        const getDBStore = (callback) => {
+            let request = window.indexedDB.open('capture', 3);
+            request.onerror = function (event) {
+                console.log('fick dich');
+                console.error('Database could not be opened');
+                callback(true);
+            };
+            
+            request.onsuccess = function (event) {
+                db = request.result;
+                console.log('Database opened successfully');
+                
+                if (!db.objectStoreNames.contains('capturePoints')) {
+                    callback("ObjectStore does not exist.");
+                    return;
+                }
+                
+                let transaction = db.transaction(['capturePoints'], 'readwrite');
+                let objectStore = transaction.objectStore('capturePoints');
+                
+                callback(false, objectStore);
+            };
+        };
+
+        const saveData = function(data) {
+            let blob = new Blob([JSON.stringify(data)], { type: 'text/plain' })
+            let anchor = document.createElement('a');
+
+            anchor.download = new Date().toISOString() + "_ThrottleConsumption.json";
+            anchor.href = (window.webkitURL || window.URL).createObjectURL(blob);
+            anchor.dataset.downloadurl = ['text/plain', anchor.download, anchor.href].join(':');
+            anchor.click();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+        document.querySelector('#delete').addEventListener('click', function(){
+            getDBStore((err, objectStore) => {
+                if(err) {
+                    alert('Error: ' + err);
+                    return;
+                }
+                let request = objectStore.clear();
+                request.onerror = function(event) {
+                    alert("Could not delete!");
+                };
+                request.onsuccess = function(event) {
+                    alert("Data deleted!");
+                };
+            });
+
+        });
+
+        document.querySelector('#download').addEventListener('click', function(){
+            getDBStore((err, objectStore) => {
+                if(err) {
+                    alert('Error: ' + err);
+                    return;
+                }
+
+                let request = objectStore.getAll();
+                request.onerror = function(event) {
+                    alert("Transaction failed.");
+                }
+                request.onsuccess = function(event) {
+                    saveData(request.result);
+                }
+            });
+
+        });
+
+        document.querySelector('#dump').addEventListener('click', function(){
+            getDBStore((err, objectStore) => {
+                if(err) {
+                    alert('Error: ' + err);
+                    return;
+                }
+
+                let request = objectStore.getAll();
+                request.onerror = function(event) {
+                    alert("Transaction failed.");
+                }
+                request.onsuccess = function(event) {
+                    document.querySelector('#data').textContent = JSON.stringify(request.result);
+                }
+            });
+
+        });
+
+    });
+    </script>
+</body>
+</html>

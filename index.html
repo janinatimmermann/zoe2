@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles/main.css">
+    <title>Zoe-Demo: Beschleunigungsinterface</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="theme-color" content="#111" />
+    <link rel="manifest" href="./manifest.json">
+</head>
+
+<body>
+
+<div class="ui blurry">
+    <!-- Background SVG -->
+    <svg width="100%" height="100%" viewBox="0 0 800 440" version="1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
+        style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+        <defs>
+            <filter id="shadow" x="-10%" y="-10%" width="200%" height="200%">
+                <feOffset result="offOut" in="SourceAlpha" dx="2" dy="2" />
+                <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
+                <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+            </filter>
+        </defs>
+        <g id="bg">
+            <path filter="url(#shadow)"
+                d="M780,37.128C780,27.675 772.325,20 762.872,20L37.128,20C27.675,20 20,27.675 20,37.128L20,404.205C20,413.659 27.675,421.333 37.128,421.333L762.872,421.333C772.325,421.333 780,413.659 780,404.205L780,37.128Z"
+                style="fill:url(#_Linear1);" />
+            <text class="capital-text graph-label" x="390px" y="397.748px" text-anchor="middle">Pedal Position</text>
+            <g class="capital-text" transform="matrix(6.12323e-17,-1,1,6.12323e-17,-1126.95,386.805)">
+                <text class="graph-label" id="side-label" text-anchor="middle" x="170px" y="1196.35px">Conversion Efficiency</text>
+            </g>
+        </g>
+        <clipPath id="inner-clip">
+            <path id="main"
+                d="M740,82.8C740,81.255 738.745,80 737.2,80L102.8,80C101.255,80 100,81.255 100,82.8L100,357.2C100,358.745 101.255,360 102.8,360L737.2,360C738.745,360 740,358.745 740,357.2L740,82.8Z" />
+        </clipPath>
+        <g clip-path="url(#inner-clip)">
+            <g opacity="0.9">
+                <path
+                    d="M740,82.8C740,81.255 738.745,80 737.2,80L102.8,80C101.255,80 100,81.255 100,82.8L100,357.2C100,358.745 101.255,360 102.8,360L737.2,360C738.745,360 740,358.745 740,357.2L740,82.8Z"
+                    style="fill:url(#_Linear3);" />
+                <clipPath id="_clip4">
+                    <path
+                        d="M740,82.8C740,81.255 738.745,80 737.2,80L102.8,80C101.255,80 100,81.255 100,82.8L100,357.2C100,358.745 101.255,360 102.8,360L737.2,360C738.745,360 740,358.745 740,357.2L740,82.8Z" />
+                </clipPath>
+                <g clip-path="url(#_clip4)">
+                    <g id="vertical-bars">
+                        <path d="M171.111,80L171.111,360"
+                            style="fill:none;stroke:white;stroke-opacity:0.08;stroke-width:0.98px;" />
+                        <path d="M242.222,80L242.222,360"
+                            style="fill:none;stroke:white;stroke-opacity:0.08;stroke-width:0.98px;" />
+                        <path d="M313.333,80L313.333,360"
+                            style="fill:none;stroke:white;stroke-opacity:0.08;stroke-width:0.98px;" />
+                        <path d="M384.444,80L384.444,360"
+                            style="fill:none;stroke:white;stroke-opacity:0.08;stroke-width:0.98px;" />
+                        <path d="M455.556,80L455.556,360"
+                            style="fill:none;stroke:white;stroke-opacity:0.08;stroke-width:0.98px;" />
+                        <path d="M526.667,80L526.667,360"
+                            style="fill:none;stroke:white;stroke-opacity:0.08;stroke-width:0.98px;" />
+                        <path d="M597.778,80L597.778,360"
+                            style="fill:none;stroke:white;stroke-opacity:0.08;stroke-width:0.98px;" />
+                        <path d="M668.889,80L668.889,360"
+                            style="fill:none;stroke:white;stroke-opacity:0.08;stroke-width:0.98px;" />
+                    </g>
+                    <g id="horizontal-bars">
+                        <path d="M740,220L100,220"
+                            style="fill:none;stroke:white;stroke-opacity:0.08;stroke-width:0.98px;" />
+                        <path d="M740,150L100,150"
+                            style="fill:none;stroke:white;stroke-opacity:0.08;stroke-width:0.98px;" />
+                        <path d="M740,80L100,80"
+                            style="fill:none;stroke:white;stroke-opacity:0.08;stroke-width:0.98px;" />
+                        <path d="M740,290L100,290"
+                            style="fill:none;stroke:white;stroke-opacity:0.08;stroke-width:0.98px;" />
+                        <path d="M740,360L100,360"
+                            style="fill:none;stroke:white;stroke-opacity:0.08;stroke-width:0.98px;" />
+                    </g>
+                </g>
+            </g>
+        </g>
+        <path
+            d="M740,82.8C740,81.255 738.745,80 737.2,80L102.8,80C101.255,80 100,81.255 100,82.8L100,357.2C100,358.745 101.255,360 102.8,360L737.2,360C738.745,360 740,358.745 740,357.2L740,82.8Z"
+            style="fill:none;stroke:rgb(71,92,109);stroke-opacity:0.95;stroke-width:1.5px;" />
+        <g id="curve-speed">
+            <path
+                d="M740,41.159C740,39.712 738.825,38.537 737.378,38.537L581.338,38.537C579.891,38.537 578.716,39.712 578.716,41.159L578.716,65.099C578.716,66.546 579.891,67.721 581.338,67.721L737.378,67.721C738.825,67.721 740,66.546 740,65.099L740,41.159Z"
+                style="fill:rgb(37,44,49);stroke:rgb(71,92,109);stroke-width:1.5px;" />
+            <g transform="matrix(1.15203,0,0,1.15203,-078.501,0)">
+                <text text-anchor="end" id="curve-speed-text" x="695.361px" y="50.203px"
+                    style="font-family: 'Roboto';font-weight:600;font-size:12px;fill:rgb(189,189,189);"></text>
+            </g>
+            <text xlink:href="/data.html" class="capital-text" x="588.934px" y="58.862px"
+                style="font-family: 'Roboto';font-weight:600;font-size:13.824px;fill:rgb(76,187,212);fill-opacity:0.58;">CURVE:</text>
+        </g>
+        <defs>
+            <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="-0.00514193" gradientUnits="userSpaceOnUse"
+                gradientTransform="matrix(760,393.307,-206.316,401.333,20,20)">
+                <stop offset="0" style="stop-color:rgba(60,81,92,0.8);stop-opacity:1" />
+                <stop offset="1" style="stop-color:rgba(40,60,72,0.8);stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="_Linear3" x1="0" y1="0" x2="1" y2="0.110418" gradientUnits="userSpaceOnUse"
+                gradientTransform="matrix(640,280,-139.378,280,100,80)">
+                <stop offset="0" style="stop-color:white;stop-opacity:1" />
+                <stop offset="0" style="stop-color:rgb(43,65,83);stop-opacity:1" />
+                <stop offset="1" style="stop-color:rgb(42,46,51);stop-opacity:1" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- Middle Canvas -->
+    <canvas id="graph-canvas" width="640" height="280">Canvas not supported</canvas>
+
+    <!-- Foreground SVG -->
+    <svg width="100%" height="100%" viewBox="0 0 800 440" version="1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
+        style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+        <text id="text-inactive" opacity="0" text-anchor="middle" x="420px" y="230px"
+            style="font-family: 'Roboto';font-weight:600;font-size:48px;fill:rgba(255, 255, 255, 0.493);">Pedal Released</text>
+        <g id="gradient-selector" transform="translate(-479, 0)">
+            <path
+                d="m 776,41.159 c 0,-1.447 -1.175,-2.622 -2.622,-2.622 h -192.04 c -1.447,0 -2.622,1.175 -2.622,2.622 v 23.94 c 0,1.447 1.175,2.622 2.622,2.622 h 192.04 c 1.447,0 2.622,-1.175 2.622,-2.622 z"
+                style="fill:rgb(37,44,49);stroke:rgb(71,92,109);stroke-width:1.5px;" />
+            <text class="capital-text" x="588.934px" y="58.862px"
+                style="font-family: 'Roboto';font-weight:600;font-size:13.824px;fill:rgb(76,187,212);fill-opacity:0.58;">GRADIENT:</text>
+            <text id="gradient-selector-off" class="selector-text active" x="675px" y="58.862px"
+                style="font-family: 'Roboto';font-weight:600;font-size:13.824px">Off</text>
+            <text id="gradient-selector-g-r" class="selector-text" x="705px" y="58.862px"
+                style="font-family: 'Roboto';font-weight:600;font-size:13.824px">G/R</text>
+            <text id="gradient-selector-b-o" class="selector-text" x="740px" y="58.862px"
+                style="font-family: 'Roboto';font-weight:600;font-size:13.824px">B/O</text>
+        </g>
+        <g id="mode-selector" transform="translate(-270, 0)">
+            <path
+                d="m 810,41.159 c 0,-1.447 -1.175,-2.622 -2.622,-2.622 h -226.04 c -1.447,0 -2.622,1.175 -2.622,2.622 v 23.94 c 0,1.447 1.175,2.622 2.622,2.622 h 226.04 c 1.447,0 2.622,-1.175 2.622,-2.622 z"
+                style="fill:rgb(37,44,49);stroke:rgb(71,92,109);stroke-width:1.5px;" />
+            <text class="capital-text" x="588.934px" y="58.862px"
+                style="font-family: 'Roboto';font-weight:600;font-size:13.824px;fill:rgb(76,187,212);fill-opacity:0.58;">MODE:</text>
+            <text id="mode-selector-efficiency" class="selector-text active" x="645px" y="58.862px"
+                style="font-family: 'Roboto';font-weight:600;font-size:13.824px">Efficiency</text>
+            <text id="mode-selector-consumption" class="selector-text" x="715px" y="58.862px"
+                style="font-family: 'Roboto';font-weight:600;font-size:13.824px">Consumption</text>
+        </g>
+        <path id="indicator-y" d="M100,183.537L740,183.537"
+            style="fill:none;stroke:white;stroke-opacity:0.8;stroke-width:1px;stroke-dasharray:5,5,0,0;" />
+        <g id="group-indicator-x">
+            <path id="indicator-x" d="M400,80.667L400,360.667"
+                style="fill:none;stroke:white;stroke-opacity:0.8;stroke-width:1px;stroke-dasharray:5,5,0,0;" />
+
+            <g clip-path="url(#inner-clip)">
+                <g class="throttle-arrow" id="arr-decrease">
+                    <g filter="url(#shadow)">
+                        <rect x="315.014" y="297.408" width="65.653" height="26.872"
+                            style="fill:white;fill-opacity:0.14;" />
+                        <path d="M281.218,313.172L315.014,279.376L315.014,342.313L281.218,313.172Z"
+                            style="fill:white;fill-opacity:0.14;" />
+                    </g>
+                    <text class="capital-text" x="308.442px" y="316.579px"
+                        style="font-family: 'Roboto';font-weight:600;font-size:14.348px;fill:rgb(212,212,212);fill-opacity:1;">REDUCE</text>
+                </g>
+                <g class="throttle-arrow" id="arr-increase">
+                    <path filter="url(#shadow)"
+                        d="M494.782,297.214L494.782,279.376L528.578,308.517L494.782,342.313L494.782,324.086L420,324.086L420,297.214L494.782,297.214Z"
+                        style="fill:white;fill-opacity:0.14;" />
+                    <text class="capital-text" x="427.893px" y="315.116px"
+                        style="font-family: 'Roboto';font-weight:600;font-size:14.348px;fill:rgb(212,212,212);fill-opacity:1;">INCREASE
+                        </text>
+                </g>
+            </g>
+        </g>
+        <circle id="indicator-circle" cx="400" cy="183.537" r="8.167"
+            style="fill:rgb(127,196,91);stroke:white;stroke-width:1px;" />
+    </svg>
+</div>
+
+<div class="connect">
+    <h2>Dongle-Connection</h2>
+    <form action="">
+        <label for="input-websocket-url">Websocket URL:</label>
+        <input type="text" value="ws://localhost:8081" name="websocket-url" id="input-websocket-url">
+        <!-- <input type="text" value="ws://192.168.178.32:8087" name="websocket-url" id="input-websocket-url"> -->
+        <button id="connect-btn">Connect</button>
+    </form>
+    <p class="err">Connection error.</p>
+</div>
+
+    <script src="scripts/vendor/NoSleep.js"></script>
+    <script src="scripts/util.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/ThrottleConversion.js"></script>
+</body>
+</html>
